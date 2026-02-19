@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyrexyyy Store • Sewa Bot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #0b1120 0%, #19223f 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .glass-card {
+            background: rgba(18, 25, 45, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(90, 150, 255, 0.25);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 50px -8px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+            padding: 2rem 2rem 2.5rem;
+            width: 100%;
+            max-width: 1200px;
+            transition: all 0.2s ease;
+            color: #eef4ff;
+        }
+        h1, h2 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(120deg, #b1d0ff, #7aa9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.25rem;
+            text-shadow: 0 2px 5px rgba(0,40,100,0.5);
+        }
+        .subhead {
+            font-size: 1rem;
+            color: #9bb3df;
+            border-left: 3px solid #3d7eff;
+            padding-left: 1rem;
+            margin-bottom: 2rem;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #b8ceff;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.3px;
+        }
+        input, .search-input, select {
+            width: 100%;
+            padding: 0.9rem 1.4rem;
+            background: rgba(8, 18, 36, 0.7);
+            border: 1px solid #2b4170;
+            border-radius: 2rem;
+            font-size: 1rem;
+            color: white;
+            outline: none;
+            transition: 0.2s;
+        }
+        select option {
+            background: #0b1429;
+            color: white;
+        }
+        input:focus, select:focus {
+            border-color: #5f91ff;
+            box-shadow: 0 0 0 3px rgba(95, 145, 255, 0.3);
+            background: #0b1429;
+        }
+        .btn {
+            background: linear-gradient(135deg, #2756d9, #1a3b9e);
+            border: none;
+            padding: 0.9rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 3rem;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(0, 30, 100, 0.5);
+            transition: 0.15s;
+            width: 100%;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #3569f0, #2249bb);
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px #001a4e;
+        }
+        .btn-small {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.9rem;
+            width: auto;
+            background: #1f3b77;
+            border-radius: 2rem;
+        }
+        .btn-danger {
+            background: #a13d3d;
+        }
+        .btn-danger:hover {
+            background: #c44b4b;
+        }
+        .btn-success {
+            background: #1d6b41;
+        }
+        .btn-success:hover {
+            background: #248f52;
+        }
+        .user-table {
+            margin-top: 2.2rem;
+            background: rgba(0, 10, 30, 0.5);
+            border-radius: 2rem;
+            padding: 1.5rem 1.2rem;
+            border: 1px solid #2f4172;
+        }
+        .user-table h3 {
+            font-weight: 400;
+            color: #c7dbff;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        th {
+            text-align: left;
+            color: #9bb9ff;
+            font-weight: 500;
+            padding-bottom: 0.5rem;
+        }
+        td {
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed #2f4570;
+            color: #d3e0ff;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .badge {
+            background: #1f3a7a;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            color: #bfd6ff;
+        }
+        .badge-banned {
+            background: #7a2f2f;
+            color: #ffbaba;
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .user-profile {
+            background: rgba(20, 40, 75, 0.6);
+            border-radius: 3rem;
+            padding: 0.8rem 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            border: 1px solid #3a5790;
+        }
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #0a142c;
+            transition: all 0.3s ease;
+        }
+        /* Border themes */
+        .border-chinese {
+            border: 4px solid #c99b3c;
+            box-shadow: 0 0 15px #ffd700, inset 0 0 10px #b8860b;
+        }
+        .border-aot {
+            border: 4px solid #5d4a36;
+            box-shadow: 0 0 15px #8b5a2b, 0 0 0 2px #2e4e2e;
+            filter: drop-shadow(0 0 5px #a0522d);
+        }
+        .border-naruto {
+            border: 4px solid #ff8c00;
+            box-shadow: 0 0 15px #ff4500, 0 0 0 3px #000;
+        }
+        .border-ramadhan {
+            border: 4px solid #2e8b57;
+            box-shadow: 0 0 15px #32cd32, 0 0 0 2px #ffd700;
+        }
+        .profile-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .profile-label {
+            font-size: 0.7rem;
+            color: #90abeb;
+            text-transform: uppercase;
+        }
+        .profile-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+        }
+        .token-box {
+            background: #0a142c;
+            padding: 1rem 1.8rem;
+            border-radius: 3rem;
+            border: 1px solid #4f73cf;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #ffd966;
+            margin: 1.2rem 0;
+            box-shadow: inset 0 2px 8px black;
+        }
+        .wa-button {
+            background: #075e54;
+            border: 1px solid #25d366;
+            border-radius: 3rem;
+            padding: 0.9rem 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            margin: 1rem 0 1.8rem 0;
+            text-decoration: none;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(0, 200, 150, 0.3);
+        }
+        .wa-button:hover {
+            background: #128c7e;
+            transform: scale(1.02);
+            border-color: #25d366;
+        }
+        .video-section {
+            background: #030c1a;
+            border-radius: 2rem;
+            padding: 1.8rem;
+            border: 1px solid #4460a8;
+            margin: 1.8rem 0;
+        }
+        .video-banner {
+            width: 100%;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            background: #000022;
+            aspect-ratio: 16/9;
+        }
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #0a0f1c;
+        }
+        .video-control {
+            margin-top: 1.2rem;
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .video-control input {
+            flex: 3;
+            min-width: 200px;
+            border-radius: 3rem;
+        }
+        .video-control button {
+            flex: 1;
+            background: #1f3b77;
+            border: none;
+            border-radius: 3rem;
+            color: white;
+            font-weight: 600;
+            padding: 0 1.5rem;
+            cursor: pointer;
+            transition: 0.1s;
+            border: 1px solid #4f7ec9;
+        }
+        .video-control button:hover {
+            background: #2b5099;
+        }
+        .logout-btn {
+            background: rgba(255, 60, 80, 0.2);
+            border: 1px solid #ff5f75;
+            color: #ffb0b8;
+            padding: 0.6rem 1.8rem;
+            border-radius: 3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .logout-btn:hover {
+            background: #ff3750;
+            color: white;
+            border-color: #ff3750;
+        }
+        .error-msg {
+            color: #ffadad;
+            background: #4d1f2c;
+            border-radius: 3rem;
+            padding: 0.5rem 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .footer-note {
+            font-size: 0.8rem;
+            color: #6b83b0;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        .small-note {
+            font-size: 0.8rem;
+            color: #a5b9f0;
+            background: #0d1b30;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            margin-top: 1rem;
+        }
+        .default-note {
+            font-size: 0.75rem;
+            color: #99b3ff;
+            background: #11203b;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            margin: 0.5rem 0;
+        }
+        .management-section, .edit-profile-section, .search-section, .role-management-section, .vip-management-section {
+            background: rgba(10, 20, 45, 0.7);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #4c6ab0;
+            margin-top: 2rem;
+        }
+        .action-btn {
+            border: none;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.1s;
+            margin-right: 0.3rem;
+        }
+        .ban-btn {
+            background: #a13d3d;
+            color: white;
+        }
+        .ban-btn:hover {
+            background: #c44b4b;
+        }
+        .unban-btn {
+            background: #1d6b41;
+            color: white;
+        }
+        .unban-btn:hover {
+            background: #248f52;
+        }
+        .file-input {
+            background: #0d1a33;
+            padding: 0.8rem;
+            border-radius: 2rem;
+            color: #b0c6ff;
+            border: 1px dashed #5f7ec9;
+            width: 100%;
+        }
+        .profile-pic-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #5f91ff;
+            margin-bottom: 1rem;
+        }
+        .search-result-item {
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #2f4570;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        .search-result-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        .role-update-form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .role-update-form select {
+            width: auto;
+            padding: 0.4rem 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="glass-card" id="mainCard">
+    <h1>⚡ dyrexyyy BOT SEWA</h1>
+    <div class="subhead">akses token · video banner · wa center</div>
+
+    <!-- LOGIN SECTION -->
+    <div id="loginSection">
+        <div style="max-width: 440px; margin: 0 auto;">
+            <div class="form-group">
+                <label>👤 Username</label>
+                <input type="text" id="loginUsername" placeholder="contoh: dyrexyy" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label>🔐 Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••">
+            </div>
+            <button class="btn" id="loginBtn">MASUK DASHBOARD</button>
+            <div id="loginError" class="error-msg hidden"></div>
+        </div>
+
+        <!-- DAFTAR 10 AKUN (hanya username & role) -->
+        <div class="user-table">
+            <h3>📋 10 AKUN TEST (username / role)</h3>
+            <table id="userListTable">
+                <!-- diisi javascript -->
+            </table>
+            <div class="small-note">
+                🔑 Password sudah ditentukan (tidak ditampilkan). Gunakan data dari owner.
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD SECTION (setelah login) -->
+    <div id="dashboardSection" class="hidden">
+        <div class="dashboard-header">
+            <div class="user-profile" id="userProfile">
+                <!-- dinamik lewat js -->
+            </div>
+            <button class="logout-btn" id="logoutBtn">↪️ KELUAR</button>
+        </div>
+
+        <!-- Token display -->
+        <div class="token-box" id="tokenDisplay">adyhansome_***</div>
+
+        <!-- Nomor WA BOT sebagai tombol -->
+        <a class="wa-button" href="https://wa.me/6283836143516" target="_blank">
+            <span>📞</span> +62 838-3614-3516 (WA Bot)
+        </a>
+
+        <!-- BANNER VIDEO (auto replay) -->
+        <div class="video-section">
+            <h3 style="margin-bottom: 0.8rem;">🎬 BANNER VIDEO (auto replay)</h3>
+            <div class="video-banner">
+                <video id="videoPlayer" controls playsinline loop poster="https://via.placeholder.com/640x360/0a1430/white?text=LOAD+VIDEO">
+                    <source id="videoSource" src="" type="video/mp4">
+                    Your browser does not support video.
+                </video>
+            </div>
+            <!-- Kontrol ganti video (hanya admin/owner) -->
+            <div id="videoControl" class="video-control hidden">
+                <input type="text" id="videoLinkInput" placeholder="https://files.catbox.moe/xxxxxx.mp4" value="">
+                <button id="setVideoBtn">🎞️ GANTI VIDEO</button>
+            </div>
+            <div class="default-note" id="videoHint">
+                ⚙️ Video default dapat diatur dengan mengubah variabel <strong>DEFAULT_VIDEO</strong> di bagian atas file HTML.
+                <br>Admin dapat mengganti video sementara melalui kontrol di atas.
+            </div>
+        </div>
+
+        <!-- EDIT PROFIL (untuk semua user) -->
+        <div class="edit-profile-section">
+            <h3 style="margin-bottom: 1rem;">✏️ Edit Profil</h3>
+            <div style="display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;">
+                <div>
+                    <img id="profilePicPreview" class="profile-pic-preview" src="https://via.placeholder.com/80/0a142c/5f91ff?text=IMG" alt="Preview">
+                </div>
+                <div style="flex:1;">
+                    <div class="form-group">
+                        <label>Username Baru</label>
+                        <input type="text" id="newUsername" placeholder="Username baru">
+                    </div>
+                    <div class="form-group">
+                        <label>Password Baru (kosongkan jika tidak ingin mengubah)</label>
+                        <input type="password" id="newPassword" placeholder="Minimal 6 karakter">
+                    </div>
+                    <div class="form-group">
+                        <label>Konfirmasi Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Konfirmasi password baru">
+                    </div>
+                    <div class="form-group">
+                        <label>Foto Profil</label>
+                        <input type="file" id="profilePicInput" accept="image/*" class="file-input">
+                    </div>
+                    <!-- Border theme selector, hanya untuk admin dan VIP -->
+                    <div id="borderThemeGroup" class="form-group hidden">
+                        <label>Tema Border</label>
+                        <select id="borderThemeSelect">
+                            <option value="chinese">Kerajaan Cina</option>
+                            <option value="aot">Attack on Titan</option>
+                            <option value="naruto">Naruto</option>
+                            <option value="ramadhan">Ramadhan</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-small" id="saveProfileBtn">SIMPAN PERUBAHAN</button>
+                    <div id="profileMessage" class="error-msg hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FITUR PENCARIAN AKUN (untuk semua user) dengan foto profil -->
+        <div class="search-section">
+            <h3 style="margin-bottom: 1rem;">🔍 Cari Teman</h3>
+            <input type="text" id="searchUserInput" class="search-input" placeholder="Ketik username...">
+            <div id="searchResult" style="margin-top: 1rem; max-height: 200px; overflow-y: auto; background: #0a142c; border-radius: 1rem; padding: 0.5rem;">
+                <!-- hasil pencarian akan diisi -->
+                <p style="color: #99b3ff; text-align: center;">Ketik untuk mencari user</p>
+            </div>
+        </div>
+
+        <!-- MANAJEMEN USER (BAN/UNBAN) - hanya untuk admin/owner -->
+        <div id="userManagement" class="management-section hidden">
+            <h3 style="margin-bottom: 1rem;">👥 Manajemen User (Ban/Unban)</h3>
+            <div style="overflow-x: auto;">
+                <table id="userManageTable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userManageBody">
+                        <!-- diisi javascript -->
+                    </tbody>
+                </table>
+            </div>
+            <p class="small-note" style="margin-top:1rem;">Hanya member dan VIP yang bisa di-ban. Admin/owner tidak dapat di-ban.</p>
+        </div>
+
+        <!-- MANAJEMEN ROLE (khusus owner) -->
+        <div id="roleManagement" class="role-management-section hidden">
+            <h3 style="margin-bottom: 1rem;">👑 Manajemen Role (Owner Only)</h3>
+            <div style="overflow-x: auto;">
+                <table id="roleManageTable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Current Role</th>
+                            <th>New Role</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="roleManageBody">
+                        <!-- diisi javascript -->
+                    </tbody>
+                </table>
+            </div>
+            <p class="small-note">Owner dapat mengubah role semua user. Hati-hati dalam memberikan role owner.</p>
+        </div>
+
+        <!-- MANAJEMEN ROLE (khusus admin dyrexyy) -->
+        <div id="adminRoleManagement" class="role-management-section hidden">
+            <h3 style="margin-bottom: 1rem;">⚙️ Manajemen Role (Admin dyrexyy)</h3>
+            <div style="overflow-x: auto;">
+                <table id="adminRoleManageTable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Current Role</th>
+                            <th>New Role</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminRoleManageBody">
+                        <!-- diisi javascript -->
+                    </tbody>
+                </table>
+            </div>
+            <p class="small-note">Admin dapat mengubah role user (tidak bisa menjadikan owner).</p>
+        </div>
+
+        <!-- MANAJEMEN VIP (khusus admin dyrexyy) -->
+        <div id="vipManagement" class="vip-management-section hidden">
+            <h3 style="margin-bottom: 1rem;">⭐ Atur Member VIP (Admin dyrexyy)</h3>
+            <div style="overflow-x: auto;">
+                <table id="vipManageTable">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Current Role</th>
+                            <th>Set VIP</th>
+                            <th>Durasi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vipManageBody">
+                        <!-- diisi javascript -->
+                    </tbody>
+                </table>
+            </div>
+            <p class="small-note">Atur masa berlaku VIP. Setelah habis, otomatis kembali menjadi member.</p>
+        </div>
+
+        <!-- Info tambahan -->
+        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: space-between;">
+            <span class="badge">✨ setiap user memiliki token unik dengan awalan adyhansome</span>
+            <span class="badge">📲 nomor bot resmi (klik langsung chat)</span>
+        </div>
+    </div>
+    <div class="footer-note">© dyrexyyy store • sewa bot premium</div>
+</div>
+
+<script>
+    (function() {
+        // ---------- DEFAULT VIDEO ----------
+        const DEFAULT_VIDEO = "https://files.catbox.moe/9p2o7j.mp4";
+
+        // ---------- DATA USER BAWAAN ----------
+        const DEFAULT_USERS = [
+            { username: "dyrexyy", password: "dyrexyy123", role: "admin", token: "adyhansome_dyrexyy_7Xq", profilePic: "", borderTheme: "", vipExpiresAt: null },
+            { username: "fahri", password: "fahri123", role: "member", token: "adyhansome_fahri_k92", profilePic: "", borderTheme: "", vipExpiresAt: null },
+            { username: "cilla", password: "cilla123", role: "VIP member", token: "adyhansome_cilla_vip3", profilePic: "", borderTheme: "chinese", vipExpiresAt: Date.now() + 30*24*60*60*1000 }, // contoh 30 hari
+            { username: "adyhansome", password: "adyboss", role: "owner", token: "adyhansome_owner_001", profilePic: "", borderTheme: "", vipExpiresAt: null },
+            { username: "joko", password: "jokopass", role: "member", token: "adyhansome_joko_swd", profilePic: "", borderTheme: "", vipExpiresAt: null },
+            { username: "sari", password: "saripass", role: "member", token: "adyhansome_sari_m22", profilePic: "", borderTheme: "", vipExpiresAt: null },
+            { username: "budi", password: "budipass", role: "member", token: "adyhansome_budi_xt", profilePic: "", borderTheme: "", vipExpiresAt: null },
+            { username: "rina", password: "rina123", role: "VIP member", token: "adyhansome_rina_xy", profilePic: "", borderTheme: "naruto", vipExpiresAt: Date.now() + 7*24*60*60*1000 },
+            { username: "agus", password: "agusaja", role: "member", token: "adyhansome_agus_7f", profilePic: "", borderTheme: "", vipExpiresAt: null },
+            { username: "dewi", password: "dewicantik", role: "member", token: "adyhansome_dewi_h9", profilePic: "", borderTheme: "", vipExpiresAt: null }
+        ];
+
+        // Kunci localStorage
+        const VIDEO_STORAGE_KEY = 'dyrexyyy_video_url';
+        const BANNED_STORAGE_KEY = 'dyrexyyy_banned_users';
+        const USERS_STORAGE_KEY = 'dyrexyyy_users_data';
+
+        // Load users dari localStorage atau gunakan default
+        function loadUsers() {
+            const stored = localStorage.getItem(USERS_STORAGE_KEY);
+            if (stored) {
+                return JSON.parse(stored);
+            } else {
+                localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(DEFAULT_USERS));
+                return DEFAULT_USERS;
+            }
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+        }
+
+        // Inisialisasi users
+        let users = loadUsers();
+
+        // Banned users
+        function getBannedUsers() {
+            const stored = localStorage.getItem(BANNED_STORAGE_KEY);
+            return stored ? JSON.parse(stored) : [];
+        }
+
+        function saveBannedUsers(bannedList) {
+            localStorage.setItem(BANNED_STORAGE_KEY, JSON.stringify(bannedList));
+        }
+
+        function isBanned(username) {
+            return getBannedUsers().includes(username);
+        }
+
+        function banUser(username) {
+            const banned = getBannedUsers();
+            if (!banned.includes(username)) {
+                banned.push(username);
+                saveBannedUsers(banned);
+            }
+        }
+
+        function unbanUser(username) {
+            const banned = getBannedUsers().filter(u => u !== username);
+            saveBannedUsers(banned);
+        }
+
+        // Cek dan perbarui VIP expiration
+        function checkVipExpiration() {
+            let changed = false;
+            const now = Date.now();
+            users.forEach(u => {
+                if (u.role === 'VIP member' && u.vipExpiresAt && u.vipExpiresAt < now) {
+                    u.role = 'member';
+                    u.vipExpiresAt = null;
+                    u.borderTheme = ''; // hilangkan border
+                    changed = true;
+                }
+            });
+            if (changed) {
+                saveUsers(users);
+            }
+        }
+
+        // Render tabel akun di halaman login
+        function renderUserTable() {
+            const tableBody = document.getElementById('userListTable');
+            let html = `<tr><th>Username</th><th>Role</th></tr>`;
+            users.forEach(u => {
+                html += `<tr><td>${u.username}</td><td>${u.role}</td></tr>`;
+            });
+            tableBody.innerHTML = html;
+        }
+
+        // Render tabel manajemen user (ban/unban) untuk admin/owner
+        function renderManageTable(currentUser) {
+            const tbody = document.getElementById('userManageBody');
+            if (!tbody) return;
+            const banned = getBannedUsers();
+            let html = '';
+            users.forEach(u => {
+                // Hanya member dan VIP yang bisa di-ban (admin/owner tidak)
+                const canBan = (u.role === 'member' || u.role === 'VIP member');
+                const statusText = banned.includes(u.username) ? 'Banned' : 'Active';
+                const statusClass = banned.includes(u.username) ? 'badge-banned' : '';
+                let actionButton = '';
+                if (canBan) {
+                    if (banned.includes(u.username)) {
+                        actionButton = `<button class="action-btn unban-btn" data-user="${u.username}">Unban</button>`;
+                    } else {
+                        actionButton = `<button class="action-btn ban-btn" data-user="${u.username}">Ban</button>`;
+                    }
+                } else {
+                    actionButton = `<span class="badge">🔒</span>`;
+                }
+                html += `<tr>
+                    <td>${u.username}</td>
+                    <td>${u.role}</td>
+                    <td><span class="badge ${statusClass}">${statusText}</span></td>
+                    <td>${actionButton}</td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+
+            document.querySelectorAll('.ban-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const username = this.dataset.user;
+                    if (confirm(`Ban user ${username}?`)) {
+                        banUser(username);
+                        renderManageTable(currentUser);
+                    }
+                });
+            });
+            document.querySelectorAll('.unban-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const username = this.dataset.user;
+                    if (confirm(`Unban user ${username}?`)) {
+                        unbanUser(username);
+                        renderManageTable(currentUser);
+                    }
+                });
+            });
+        }
+
+        // Render tabel manajemen role (khusus owner)
+        function renderRoleManageTable() {
+            const tbody = document.getElementById('roleManageBody');
+            if (!tbody) return;
+            let html = '';
+            users.forEach(u => {
+                html += `<tr>
+                    <td>${u.username}</td>
+                    <td>${u.role}</td>
+                    <td>
+                        <select id="owner-role-select-${u.username}" class="role-select">
+                            <option value="member" ${u.role === 'member' ? 'selected' : ''}>member</option>
+                            <option value="VIP member" ${u.role === 'VIP member' ? 'selected' : ''}>VIP member</option>
+                            <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>admin</option>
+                            <option value="owner" ${u.role === 'owner' ? 'selected' : ''}>owner</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn-small btn-success update-role-btn" data-user="${u.username}" data-owner="true">Update</button>
+                    </td>
+                </tr>`;
+            });
+            tbody.innerHTML = html;
+
+            document.querySelectorAll('.update-role-btn[data-owner="true"]').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const username = this.dataset.user;
+                    const select = document.getElementById(`owner-role-select-${username}`);
+                    const newRole = select.value;
+                    if (confirm(`Ubah role ${username} menjadi ${newRole}?`)) {
+                        const userIndex = users.findIndex(u => u.username === username);
+                        if (userIndex !== -1) {
+                            users[userIndex].role = newRole;
+                            // Jika bukan VIP, hapus border dan expiration
+                            if (newRole !== 'VIP member') {
+                                users[userIndex].vipExpiresAt = null;
+                                users[userIndex].borderTheme = '';
+                            }
+                            saveUsers(users);
+                            // Refresh semua tampilan
+                            renderUserTable();
+                            const currentUser = getLoggedInUser();
+                            if (currentUser) {
+                                if (currentUser.username === username) {
+                                    currentUser.role = newRole;
+                                    setLoggedInUser(currentUser);
+                                    showDashboard(currentUser);
+                                } else {
+                                    renderManageTable(currentUser);
+                                    renderRoleManageTable();
+                                    renderAdminRoleManageTable();
+                                    renderVipManageTable();
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        // Render tabel manajemen role untuk admin (dyrexyy) - tidak bisa jadi owner
+        function renderAdminRoleManageTable() {
+            const tbody = document.getElementById('adminRoleManageBody');
+            if (!tbody) return;
+            let html = '';
+            users.forEach(u => {
+                // Admin tidak bisa mengubah role owner
+                if (u.role === 'owner') {
+                    html += `<tr><td>${u.username}</td><td>${u.role}</td><td colspan="2">(owner tidak dapat diubah)</td></tr>`;
+                } else {
+                    html += `<tr>
+                        <td>${u.username}</td>
+                        <td>${u.role}</td>
+                        <td>
+                            <select id="admin-role-select-${u.username}" class="role-select">
+                                <option value="member" ${u.role === 'member' ? 'selected' : ''}>member</option>
+                                <option value="VIP member" ${u.role === 'VIP member' ? 'selected' : ''}>VIP member</option>
+                                <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>admin</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn-small btn-success update-role-admin-btn" data-user="${u.username}">Update</button>
+                        </td>
+                    </tr>`;
+                }
+            });
+            tbody.innerHTML = html;
+
+            document.querySelectorAll('.update-role-admin-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const username = this.dataset.user;
+                    const select = document.getElementById(`admin-role-select-${username}`);
+                    const newRole = select.value;
+                    if (confirm(`Ubah role ${username} menjadi ${newRole}?`)) {
+                        const userIndex = users.findIndex(u => u.username === username);
+                        if (userIndex !== -1) {
+                            users[userIndex].role = newRole;
+                            if (newRole !== 'VIP member') {
+                                users[userIndex].vipExpiresAt = null;
+                                users[userIndex].borderTheme = '';
+                            }
+                            saveUsers(users);
+                            renderUserTable();
+                            const currentUser = getLoggedInUser();
+                            if (currentUser) {
+                                if (currentUser.username === username) {
+                                    currentUser.role = newRole;
+                                    setLoggedInUser(currentUser);
+                                    showDashboard(currentUser);
+                                } else {
+                                    renderManageTable(currentUser);
+                                    renderAdminRoleManageTable();
+                                    renderVipManageTable();
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        // Render tabel manajemen VIP untuk admin
+        function renderVipManageTable() {
+            const tbody = document.getElementById('vipManageBody');
+            if (!tbody) return;
+            let html = '';
+            users.forEach(u => {
+                // Hanya bisa mengatur untuk member dan yang sudah VIP
+                if (u.role === 'member' || u.role === 'VIP member') {
+                    html += `<tr>
+                        <td>${u.username}</td>
+                        <td>${u.role}</td>
+                        <td>
+                            <input type="checkbox" id="vip-check-${u.username}" ${u.role === 'VIP member' ? 'checked' : ''}>
+                        </td>
+                        <td>
+                            <select id="vip-durasi-${u.username}">
+                                <option value="1">1 hari</option>
+                                <option value="7">7 hari</option>
+                                <option value="30">30 hari</option>
+                                <option value="0">Permanen</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn-small btn-success apply-vip-btn" data-user="${u.username}">Terapkan</button>
+                        </td>
+                    </tr>`;
+                }
+            });
+            tbody.innerHTML = html;
+
+            document.querySelectorAll('.apply-vip-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const username = this.dataset.user;
+                    const isVip = document.getElementById(`vip-check-${username}`).checked;
+                    const durasi = parseInt(document.getElementById(`vip-durasi-${username}`).value);
+                    const userIndex = users.findIndex(u => u.username === username);
+                    if (userIndex !== -1) {
+                        if (isVip) {
+                            users[userIndex].role = 'VIP member';
+                            if (durasi === 0) {
+                                users[userIndex].vipExpiresAt = null; // permanen
+                            } else {
+                                const now = Date.now();
+                                users[userIndex].vipExpiresAt = now + durasi * 24 * 60 * 60 * 1000;
+                            }
+                            // Beri border default jika belum punya
+                            if (!users[userIndex].borderTheme) {
+                                users[userIndex].borderTheme = 'chinese'; // default
+                            }
+                        } else {
+                            users[userIndex].role = 'member';
+                            users[userIndex].vipExpiresAt = null;
+                            users[userIndex].borderTheme = '';
+                        }
+                        saveUsers(users);
+                        renderUserTable();
+                        const currentUser = getLoggedInUser();
+                        if (currentUser) {
+                            if (currentUser.username === username) {
+                                currentUser.role = users[userIndex].role;
+                                currentUser.vipExpiresAt = users[userIndex].vipExpiresAt;
+                                currentUser.borderTheme = users[userIndex].borderTheme;
+                                setLoggedInUser(currentUser);
+                                showDashboard(currentUser);
+                            } else {
+                                renderManageTable(currentUser);
+                                renderAdminRoleManageTable();
+                                renderVipManageTable();
+                            }
+                        }
+                    }
+                });
+            });
+        }
+
+        // Cek session login
+        function getLoggedInUser() {
+            const data = sessionStorage.getItem('dyrexyy_user');
+            return data ? JSON.parse(data) : null;
+        }
+
+        function setLoggedInUser(user) {
+            sessionStorage.setItem('dyrexyy_user', JSON.stringify(user));
+        }
+
+        function clearSession() {
+            sessionStorage.removeItem('dyrexyy_user');
+        }
+
+        // Mendapatkan URL video
+        function getVideoUrl() {
+            return localStorage.getItem(VIDEO_STORAGE_KEY) || DEFAULT_VIDEO;
+        }
+
+        function setVideoUrl(url) {
+            localStorage.setItem(VIDEO_STORAGE_KEY, url);
+            const videoSource = document.getElementById('videoSource');
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoSource.src = url;
+            videoPlayer.load();
+            videoPlayer.play().catch(e => console.log('autoplay dicegah'));
+        }
+
+        // Helper untuk mendapatkan class border
+        function getBorderClass(role, borderTheme) {
+            if ((role === 'admin' || role === 'VIP member' || role === 'owner') && borderTheme) {
+                return `border-${borderTheme}`;
+            }
+            return '';
+        }
+
+        // Update tampilan dashboard
+        function showDashboard(user) {
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('dashboardSection').classList.remove('hidden');
+
+            // Profile section dengan foto dan border
+            const borderClass = getBorderClass(user.role, user.borderTheme);
+            const profileDiv = document.getElementById('userProfile');
+            profileDiv.innerHTML = `
+                <img src="${user.profilePic || 'https://via.placeholder.com/50/0a142c/5f91ff?text=User'}" class="profile-pic ${borderClass}" alt="profile">
+                <div class="profile-item"><span class="profile-label">user</span><span class="profile-value">${user.username}</span></div>
+                <div class="profile-item"><span class="profile-label">role</span><span class="profile-value">${user.role}</span></div>
+            `;
+
+            document.getElementById('tokenDisplay').innerText = user.token;
+
+            // Video
+            const currentVideo = getVideoUrl();
+            document.getElementById('videoSource').src = currentVideo;
+            document.getElementById('videoPlayer').load();
+
+            // Preview foto di form edit
+            document.getElementById('profilePicPreview').src = user.profilePic || 'https://via.placeholder.com/80/0a142c/5f91ff?text=IMG';
+            document.getElementById('newUsername').value = user.username;
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+            // Border theme selector
+            const borderGroup = document.getElementById('borderThemeGroup');
+            if (user.role === 'admin' || user.role === 'VIP member' || user.role === 'owner') {
+                borderGroup.classList.remove('hidden');
+                document.getElementById('borderThemeSelect').value = user.borderTheme || 'chinese';
+            } else {
+                borderGroup.classList.add('hidden');
+            }
+
+            // Reset message
+            const profileMsg = document.getElementById('profileMessage');
+            profileMsg.classList.add('hidden');
+            profileMsg.style.background = '';
+
+            // Cek apakah user adalah admin atau owner (untuk video control)
+            const isAdminOrOwner = (user.role === 'admin' || user.role === 'owner');
+            const videoControl = document.getElementById('videoControl');
+            if (isAdminOrOwner) {
+                videoControl.classList.remove('hidden');
+                document.getElementById('videoLinkInput').value = currentVideo;
+            } else {
+                videoControl.classList.add('hidden');
+            }
+
+            // Manajemen user (ban/unban) untuk admin/owner
+            const managementDiv = document.getElementById('userManagement');
+            if (isAdminOrOwner) {
+                managementDiv.classList.remove('hidden');
+                renderManageTable(user);
+            } else {
+                managementDiv.classList.add('hidden');
+            }
+
+            // Manajemen role (khusus owner)
+            const roleManagementDiv = document.getElementById('roleManagement');
+            if (user.role === 'owner') {
+                roleManagementDiv.classList.remove('hidden');
+                renderRoleManageTable();
+            } else {
+                roleManagementDiv.classList.add('hidden');
+            }
+
+            // Manajemen role admin (khusus dyrexyy)
+            const adminRoleDiv = document.getElementById('adminRoleManagement');
+            if (user.username === 'dyrexyy') {
+                adminRoleDiv.classList.remove('hidden');
+                renderAdminRoleManageTable();
+            } else {
+                adminRoleDiv.classList.add('hidden');
+            }
+
+            // Manajemen VIP (khusus dyrexyy)
+            const vipDiv = document.getElementById('vipManagement');
+            if (user.username === 'dyrexyy') {
+                vipDiv.classList.remove('hidden');
+                renderVipManageTable();
+            } else {
+                vipDiv.classList.add('hidden');
+            }
+
+            // Bersihkan hasil pencarian
+            document.getElementById('searchResult').innerHTML = '<p style="color: #99b3ff; text-align: center;">Ketik untuk mencari user</p>';
+            document.getElementById('searchUserInput').value = '';
+        }
+
+        // Tampilkan login
+        function showLogin() {
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+            hideError();
+        }
+
+        function showError(msg) {
+            const errDiv = document.getElementById('loginError');
+            errDiv.innerText = msg;
+            errDiv.classList.remove('hidden');
+        }
+
+        function hideError() {
+            document.getElementById('loginError').classList.add('hidden');
+        }
+
+        // Simpan perubahan profile
+        function saveProfileChanges(currentUser) {
+            const newUsername = document.getElementById('newUsername').value.trim();
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
+            const fileInput = document.getElementById('profilePicInput');
+            const borderTheme = document.getElementById('borderThemeSelect').value;
+            const profileMsg = document.getElementById('profileMessage');
+
+            // Validasi username
+            if (!newUsername) {
+                profileMsg.innerText = 'Username tidak boleh kosong.';
+                profileMsg.classList.remove('hidden');
+                profileMsg.style.background = '#4d1f2c';
+                return;
+            }
+
+            // Cek unik username (kecuali dirinya sendiri)
+            const userExists = users.some(u => u.username === newUsername && u.username !== currentUser.username);
+            if (userExists) {
+                profileMsg.innerText = 'Username sudah digunakan oleh user lain.';
+                profileMsg.classList.remove('hidden');
+                profileMsg.style.background = '#4d1f2c';
+                return;
+            }
+
+            // Validasi password jika diisi
+            if (newPassword.length > 0) {
+                if (newPassword.length < 6) {
+                    profileMsg.innerText = 'Password minimal 6 karakter.';
+                    profileMsg.classList.remove('hidden');
+                    profileMsg.style.background = '#4d1f2c';
+                    return;
+                }
+                if (newPassword !== confirmPass) {
+                    profileMsg.innerText = 'Konfirmasi password tidak cocok.';
+                    profileMsg.classList.remove('hidden');
+                    profileMsg.style.background = '#4d1f2c';
+                    return;
+                }
+            }
+
+            // Proses foto profil jika ada
+            let profilePic = currentUser.profilePic;
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePic = e.target.result;
+                    updateUserData(currentUser, newUsername, newPassword, profilePic, borderTheme, profileMsg);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                updateUserData(currentUser, newUsername, newPassword, profilePic, borderTheme, profileMsg);
+            }
+        }
+
+        function updateUserData(currentUser, newUsername, newPassword, profilePic, borderTheme, msgDiv) {
+            // Update di array users
+            const index = users.findIndex(u => u.username === currentUser.username);
+            if (index !== -1) {
+                users[index].username = newUsername;
+                if (newPassword) users[index].password = newPassword;
+                users[index].profilePic = profilePic;
+                users[index].borderTheme = borderTheme;
+                // Simpan ke localStorage
+                saveUsers(users);
+
+                // Update session storage
+                const updatedUser = { ...users[index] };
+                setLoggedInUser(updatedUser);
+
+                // Tampilkan pesan sukses
+                msgDiv.innerText = 'Profil berhasil diperbarui!';
+                msgDiv.classList.remove('hidden');
+                msgDiv.style.background = '#1d6b41';
+                msgDiv.style.color = 'white';
+
+                // Refresh dashboard
+                showDashboard(updatedUser);
+                // Refresh tabel login
+                renderUserTable();
+            }
+        }
+
+        // Fitur pencarian user dengan foto profil dan border
+        function setupSearch() {
+            const searchInput = document.getElementById('searchUserInput');
+            const resultDiv = document.getElementById('searchResult');
+            if (!searchInput) return;
+
+            searchInput.addEventListener('input', function() {
+                const query = this.value.trim().toLowerCase();
+                if (query === '') {
+                    resultDiv.innerHTML = '<p style="color: #99b3ff; text-align: center;">Ketik untuk mencari user</p>';
+                    return;
+                }
+                // Gunakan data users terbaru
+                const filtered = users.filter(u => u.username.toLowerCase().includes(query));
+                if (filtered.length === 0) {
+                    resultDiv.innerHTML = '<p style="color: #ffadad; text-align: center;">Tidak ditemukan</p>';
+                } else {
+                    let html = '';
+                    filtered.forEach(u => {
+                        const profilePic = u.profilePic || 'https://via.placeholder.com/30/0a142c/5f91ff?text=User';
+                        const borderClass = getBorderClass(u.role, u.borderTheme);
+                        html += `<div class="search-result-item">
+                            <img src="${profilePic}" class="search-result-img ${borderClass}" alt="foto">
+                            <span style="flex:1;">${u.username}</span>
+                            <span class="badge">${u.role}</span>
+                        </div>`;
+                    });
+                    resultDiv.innerHTML = html;
+                }
+            });
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            renderUserTable();
+
+            // Inisialisasi localStorage
+            if (!localStorage.getItem(VIDEO_STORAGE_KEY)) {
+                localStorage.setItem(VIDEO_STORAGE_KEY, DEFAULT_VIDEO);
+            }
+            if (!localStorage.getItem(BANNED_STORAGE_KEY)) {
+                localStorage.setItem(BANNED_STORAGE_KEY, JSON.stringify([]));
+            }
+            if (!localStorage.getItem(USERS_STORAGE_KEY)) {
+                saveUsers(DEFAULT_USERS);
+            }
+            users = loadUsers(); // reload
+            checkVipExpiration(); // cek expired VIP
+
+            // Cek session
+            const user = getLoggedInUser();
+            if (user) {
+                const exists = users.some(u => u.username === user.username && u.password === user.password);
+                if (exists && !isBanned(user.username)) {
+                    showDashboard(user);
+                } else {
+                    clearSession();
+                    showLogin();
+                }
+            } else {
+                showLogin();
+            }
+
+            // Login button
+            document.getElementById('loginBtn').addEventListener('click', function() {
+                const username = document.getElementById('loginUsername').value.trim();
+                const password = document.getElementById('loginPassword').value.trim();
+
+                checkVipExpiration(); // cek sebelum login
+
+                const foundUser = users.find(u => u.username === username && u.password === password);
+                if (foundUser) {
+                    if (isBanned(username)) {
+                        showError('Akun ini telah di-banned! Hubungi admin.');
+                        return;
+                    }
+                    hideError();
+                    setLoggedInUser(foundUser);
+                    showDashboard(foundUser);
+                } else {
+                    showError('Username / password salah! Cek data dari owner.');
+                }
+            });
+
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                clearSession();
+                showLogin();
+            });
+
+            // Ganti video (admin/owner)
+            document.getElementById('setVideoBtn').addEventListener('click', function() {
+                const newLink = document.getElementById('videoLinkInput').value.trim();
+                if (newLink) {
+                    setVideoUrl(newLink);
+                } else {
+                    alert('Masukkan link video terlebih dahulu');
+                }
+            });
+
+            // Simpan profil
+            document.getElementById('saveProfileBtn').addEventListener('click', function() {
+                const currentUser = getLoggedInUser();
+                if (currentUser) {
+                    saveProfileChanges(currentUser);
+                }
+            });
+
+            // Enter pada password
+            document.getElementById('loginPassword').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('loginBtn').click();
+                }
+            });
+
+            // Preview foto sebelum upload
+            document.getElementById('profilePicInput').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(ev) {
+                        document.getElementById('profilePicPreview').src = ev.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Setup pencarian
+            setupSearch();
+        });
+    })();
+</script>
+</body>
+</html>
